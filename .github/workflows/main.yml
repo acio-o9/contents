@@ -13,10 +13,13 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: npm ci
-      working-directory: './src/'
+
+    - run: npm install --frozen-lockfile
+      working-directory: './src/application'
+
     - run: npm run build && npm run export
       working-directory: './src/application'
+
     - uses: jakejarvis/s3-sync-action@master
       with:
         args: --acl public-read --follow-symlinks --delete
