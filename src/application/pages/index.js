@@ -3,7 +3,7 @@ import ArticleList from '../components/ArticleList';
 
 function Index( {articles} ) {
   return (
-    <Layout>
+    <Layout title="maru34 - WEB系エンジニアの趣味ブログ">
       <ArticleList articles={articles}/>
     </Layout>
   )
