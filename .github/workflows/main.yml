@@ -18,8 +18,9 @@ jobs:
 
     - run: npm install --frozen-lockfile
       working-directory: './src/application'
-
-    - run: npm run build && npm run export
+    - run: npx cross-env CMS_ENDPOINT=${{ secrets.CMS_ENDPOINT}} CMS_API_KEY=${{ secrets.CMS_API_KEY}} next build
+      working-directory: './src/application'
+    - run: npm run export
       working-directory: './src/application'
 
     - uses: jakejarvis/s3-sync-action@master
