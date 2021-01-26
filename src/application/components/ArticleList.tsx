@@ -1,32 +1,33 @@
 import React, { FC } from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles } from '@material-ui/core/styles';
+import withStyles, { WithStyles, StyleRules } from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const ArticleList: FC<{ articles: Array<any> }> = ({ articles }) => {
+interface Props extends WithStyles<typeof styles> {
+  articles: Array<any>;
+}
 
-  const useStyles = makeStyles(() => {
-    createStyles({
-      root: {
-        minWidth: 275,
-      },
-      title: {
-        fontSize: 14,
-      },
-      pos: {
-        marginBottom: 12,
-      },
-    });
-  })
+const styles = () : StyleRules => createStyles({
+  root: {
+    minWidth: 275,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
-  const classes = useStyles()
+const ArticleList: FC<Props> = ({ articles, classes }) => {
   return (
     <section>
       <ul>
-        {articles.map((article: any , index: number) => (
+        {articles.map((article: any, index: number) => (
           <li key={index}>
             <Card className={classes.root}>
               <CardContent>
@@ -54,4 +55,4 @@ const ArticleList: FC<{ articles: Array<any> }> = ({ articles }) => {
   )
 }
 
-export default ArticleList;
+export default withStyles(styles)(ArticleList);
