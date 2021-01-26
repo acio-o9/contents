@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC } from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-class ArticleList extends Component {
-  constructor ({props, articles}) {
-    super(props);
-    this.articles = articles;
-    this.classes = this.useStyles();
-  }
+const ArticleList: FC<{ articles: Array<any> }> = ({ articles }) => {
 
-  useStyles() {
-    return makeStyles({
+  const useStyles = makeStyles(() => {
+    createStyles({
       root: {
         minWidth: 275,
       },
@@ -25,39 +20,38 @@ class ArticleList extends Component {
         marginBottom: 12,
       },
     });
-  }
+  })
 
-  render() {
-    return (
-      <section>
-        <ul>
-          {this.articles.map((article, index) => (
-            <li key={index}>
-              <Card className={this.classes.root}>
-                <CardContent>
-                  <Typography className={this.classes.title} color="textSecondary" gutterBottom>
-                      {article.publishedAt}
-                  </Typography>
-                  <Typography variant="h5" component="h2">
-                      {article.title}
-                  </Typography>
-                  <Typography className={this.classes.pos} color="textSecondary">
-                    Subtitle
-                  </Typography>
-                  <Typography variant="body2" component="p">
-                      {article.body}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">More</Button>
-                </CardActions>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )
-  }
+  const classes = useStyles()
+  return (
+    <section>
+      <ul>
+        {articles.map((article: any , index: number) => (
+          <li key={index}>
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    {article.publishedAt}
+                </Typography>
+                <Typography variant="h5" component="h2">
+                    {article.title}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  Subtitle
+                </Typography>
+                <Typography variant="body2" component="p">
+                    {article.body}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">More</Button>
+              </CardActions>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
 }
 
 export default ArticleList;
