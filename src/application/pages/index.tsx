@@ -1,9 +1,10 @@
+import { FC } from 'react';
 import Layout from '../components/Layout';
 import ArticleList from '../components/ArticleList';
 
-function Index( {articles} ) {
+const Index: FC<{ articles: Array<any> }> = ({articles}) => {
   return (
-    <Layout title="maru34 - WEB系エンジニアの趣味ブログ">
+    <Layout title={"maru34 - WEB系エンジニアの趣味ブログ"}>
       <ArticleList articles={articles}/>
     </Layout>
   )
