@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import Layout from '../components/Layout';
 import ArticleList from '../components/ArticleList';
+import ClientInterface from '../modules/api/ClinetInterface';
+import MicroCmsClient from '../modules/api/MicroCmsClient';
+import MockClient from '../modules/api/MockClient';
 
 const Index: FC<{ articles: Array<any> }> = ({articles}) => {
   return (
@@ -11,43 +14,15 @@ const Index: FC<{ articles: Array<any> }> = ({articles}) => {
 }
 
 export async function getStaticProps() {
-  // TODO fetching resource using an external module
-  if (process.env.NODE_ENV == 'development') {
-    const mock = {
-      contents: [
-        {
-          id: 'w8ywix2yy',
-          publishedAt: '2021-01-23T05:26:58.067Z',
-          title: 'tetetest',
-          body: '<p>ほんぶんです</p>'
-        },
-        {
-          id: '5sa6f6jsc',
-          publishedAt: '2020-10-27T14:46:35.326Z',
-          title: 'テスト',
-          body: '<p>記事テスト</p>'
-        }
-      ],
-      totalCount: 2,
-      offset: 0,
-      limit: 10
-    };
-    return {
-      props: {
-        articles: mock.contents,
-      },
-    }
-  }
+  let client: ClientInterface = (process.env.NODE_ENV == 'development')
+    ? new MockClient('articles')
+    : new MicroCmsClient('articles');
 
-  const key = {
-      headers: {'X-API-KEY': process.env.CMS_API_KEY}
-  }
-  const endpoint = process.env.CMS_ENDPOINT;
-  const res = await fetch(endpoint + 'articles', key)
-  const json = await res.json();
+  const result = await client.findAll();
+
   return {
     props: {
-      articles: json.contents,
+      articles: result.contents
     },
   }
 }
