@@ -7,6 +7,16 @@ class MicroCmsClient implements ClientInterface {
     this.resource = resource;
   }
 
+  async find(id: string) {
+    const key = {
+      headers: {'X-API-KEY': process.env.CMS_API_KEY}
+    }
+    const endpoint = process.env.CMS_ENDPOINT;
+    const res = await fetch(endpoint + this.resource + '/' + id, key)
+    const json = await res.json();
+    return json;
+  }
+
   async findAll() {
     const key = {
       headers: {'X-API-KEY': process.env.CMS_API_KEY}
