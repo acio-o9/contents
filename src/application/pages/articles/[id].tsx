@@ -11,7 +11,7 @@ const Index: FC<{ article: any }> = ({article}) => {
       <h1>{article.title}</h1>
       <div>
         <span>Date: {article.publishedAt}</span>
-        <span>{article.body}</span>
+        <div dangerouslySetInnerHTML={{__html: article.body}}></div>
       </div>
     </Layout>
   )
