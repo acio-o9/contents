@@ -1,9 +1,9 @@
 import {GetStaticPaths} from 'next';
 import { FC } from 'react';
-import Layout from '../../components/Layout';
-import ClientInterface from '../../modules/api/ClinetInterface';
-import MicroCmsClient from '../../modules/api/MicroCmsClient';
-import MockClient from '../../modules/api/MockClient';
+import Layout from '../../../components/Layout';
+import ClientInterface from '../../../modules/api/ClinetInterface';
+import MicroCmsClient from '../../../modules/api/MicroCmsClient';
+import MockClient from '../../../modules/api/MockClient';
 
 const Index: FC<{ article: any }> = ({article}) => {
   return (
