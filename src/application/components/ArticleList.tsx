@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {Link} from '@material-ui/core';
 
 interface Props extends WithStyles<typeof styles> {
   articles: Array<any>;
@@ -29,25 +30,22 @@ const ArticleList: FC<Props> = ({ articles, classes }) => {
       <ul>
         {articles.map((article: any, index: number) => (
           <li key={index}>
-            <Card className={classes.root}>
-              <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {article.publishedAt}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    {article.title}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Subtitle
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {article.body}
-                </Typography>
-              </CardContent>
-              <CardActions>
+            <Link href={`/articles/${article.id}`}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography className={classes.title} color="textSecondary" gutterBottom>
+                      {article.publishedAt}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                      {article.title}
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    Subtitle
+                  </Typography>
+                </CardContent>
                 <Button size="small">More</Button>
-              </CardActions>
-            </Card>
+              </Card>
+            </Link>
           </li>
         ))}
       </ul>
