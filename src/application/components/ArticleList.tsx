@@ -22,6 +22,16 @@ const styles = () : StyleRules => createStyles({
   pos: {
     marginBottom: 12,
   },
+  tag__list: {
+    padding: '10px 0px 0px 0px',
+    display: 'flex',
+  },
+  tag__element: {
+    padding: '0px 7px',
+    marginRight: '10px',
+    borderRadius: '5px',
+    background: '#CCCCCC',
+  },
 });
 
 const ArticleList: FC<Props> = ({ articles, classes }) => {
@@ -40,10 +50,13 @@ const ArticleList: FC<Props> = ({ articles, classes }) => {
                       {article.title}
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">
-                    Subtitle
+                    <ul className={classes.tag__list}>
+                      {'tags' in article && article.tags.map((tag: any) => (
+                        <li className={classes.tag__element}>{tag.name}</li>
+                      ))}
+                    </ul>
                   </Typography>
                 </CardContent>
-                <Button size="small">More</Button>
               </Card>
             </Link>
           </li>
